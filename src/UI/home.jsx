@@ -10,7 +10,7 @@ const ThemeToggle = ({ isDark, toggleTheme }) => (
 
 // Header Component
 const Header = ({ isDark, toggleTheme }) => (
-  <header className="flex items-center justify-between px-4 py-3 border-b bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+  <header className="flex items-center justify-between px-4 py-3 border-b bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200 fixed w-full z-[999]">
     <div className="flex items-center gap-4">
       <button className="text-2xl text-gray-700 dark:text-gray-200 transition-colors duration-200"><HiMenu /></button>
       <a href="#" className="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-200">Notes</a>
@@ -42,7 +42,7 @@ const NoteCard = ({ title, date, content }) => (
 
 // Category Link Component
 const CategoryLink = ({ name }) => (
-  <a href="#" className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
+  <a href="#" className="bg-white shadow  dark:bg-gray-700 rounded-lg px-4 py-3 flex items-center justify-between transition-colors duration-200">
     <div className="text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors duration-200">{name}</div>
     <HiOutlineChevronRight className="text-gray-400 dark:text-gray-500 transition-colors duration-200" />
   </a>
@@ -50,7 +50,7 @@ const CategoryLink = ({ name }) => (
 
 // Navigation Bar Component
 const NavigationBar = () => (
-  <nav className="flex items-center justify-between px-4 py-3 border-t bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+  <nav className="flex items-center justify-between px-4 py-3 border-t bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200 fixed w-full z-[999] bottom-0">
     {[
       { name: 'Home', icon: HiHome },
       { name: 'Search', icon: HiSearch },
@@ -84,9 +84,9 @@ const NotesApp = () => {
   }, [isDark]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200">
+    <div className="flex flex-col min-h-screen h-[200vh] bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200">
       <Header isDark={isDark} toggleTheme={toggleTheme} />
-      <main className="flex-1 px-4 py-6 overflow-y-auto">
+      <main className="flex-1 px-4 py-6 overflow-y-auto mt-14">
         <div className="relative mb-6">
           <input 
             type="search" 
