@@ -50,11 +50,10 @@ const CategoryLink = ({ name }) => (
 
 // Navigation Bar Component
 const NavigationBar = () => (
-  <nav className="flex items-center justify-between px-4 py-3 border-t bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200 fixed w-full z-[999] bottom-0">
+  <nav className="flex items-center justify-evenly  md:px-16 px-4 xl:justify-evenly py-3 border-t bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200 fixed w-full z-[999] bottom-0">
     {[
       { name: 'Home', icon: HiHome },
       { name: 'Search', icon: HiSearch },
-      { name: 'Add', icon: HiPlus },
       { name: 'Categories', icon: HiViewGrid },
       { name: 'Profile', icon: HiUser }
     ].map(({ name, icon: Icon }) => (
