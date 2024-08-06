@@ -1,4 +1,4 @@
-import Component from "./UI/home"
+import NotesApp from "./UI/home"
 
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-    <Component/>
+    <NotesApp/>
     </>
   )
 }
