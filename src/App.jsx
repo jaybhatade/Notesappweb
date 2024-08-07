@@ -1,3 +1,4 @@
+import SimpleNoteForm from "./UI/AddNote"
 import NotesApp from "./UI/home"
 
 
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-    <NotesApp/>
+      <NotesApp />
+      <SimpleNoteForm />
     </>
   )
 }

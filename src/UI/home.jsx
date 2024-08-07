@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HiMenu, HiSearch, HiPlus, HiHome, HiViewGrid, HiUser, HiOutlineChevronRight, HiSun, HiMoon } from 'react-icons/hi';
+import AddNoteForm from './AddNote';
 
 // Theme toggle component
 const ThemeToggle = ({ isDark, toggleTheme }) => (
@@ -119,8 +120,12 @@ const NotesApp = () => {
             <CategoryLink name="JavaScript" />
           </div>
         </section>
+
+        <section>
+        
+        </section>
       </main>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
     </div>
   );
 };
