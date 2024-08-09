@@ -8,7 +8,10 @@ function App() {
   return (
     <>
       <NotesApp />
+      <div className="pb-40">
       <SimpleNoteForm />
+
+      </div>
     </>
   )
 }

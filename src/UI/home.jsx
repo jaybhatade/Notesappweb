@@ -125,7 +125,7 @@ const NotesApp = () => {
         
         </section>
       </main>
-      {/* <NavigationBar /> */}
+      <NavigationBar />
     </div>
   );
 };
