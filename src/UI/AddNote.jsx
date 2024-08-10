@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SimpleNoteForm = () => {
+export default function NotesForm() {
   const [formData, setFormData] = useState({
     title: '',
-    content: ''
+    content: '',
+    video: ''
   });
 
   const handleChange = (e) => {
@@ -18,9 +19,9 @@ const SimpleNoteForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/simple-notes', formData);
+      await axios.post('/api/notes', formData);
       alert('Note added successfully!');
-      setFormData({ title: '', content: '' }); // Reset form
+      setFormData({ title: '', content: '', video: '' }); // Reset form
     } catch (error) {
       console.error('Error adding note:', error);
       alert('Error adding note. Please try again.');
@@ -28,43 +29,70 @@ const SimpleNoteForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Add New Note</h2>
-      
-      <div className="mb-4">
-        <label htmlFor="title" className="block text-gray-700 font-bold mb-2">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
+    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between">
+          <h1 className="text-lg font-medium text-gray-900 dark:text-gray-100">Notes</h1>
+        </div>
       </div>
-      
-      <div className="mb-6">
-        <label htmlFor="content" className="block text-gray-700 font-bold mb-2">Content</label>
-        <textarea
-          id="content"
-          name="content"
-          value={formData.content}
-          onChange={handleChange}
-          rows="4"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        ></textarea>
+      <div className="flex-1 px-4 py-6 overflow-auto">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Title
+            </label>
+            <input
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Enter a title"
+              className="block w-full h-10 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-900 placeholder-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
+            />
+          </div>
+          <div className="space-y-2">
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Content
+            </label>
+            <textarea
+              id="content"
+              name="content"
+              value={formData.content}
+              onChange={handleChange}
+              placeholder="Enter your notes"
+              className="block w-full h-40 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-900 placeholder-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
+            />
+          </div>
+          <div className="space-y-2">
+            <label
+              htmlFor="video"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Video Link
+            </label>
+            <input
+              id="video"
+              name="video"
+              value={formData.video}
+              onChange={handleChange}
+              placeholder="Enter a video link"
+              className="block w-full h-10 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-900 placeholder-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
+            />
+          </div>
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-md bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-400"
+          >
+            Add Note
+          </button>
+        </form>
       </div>
-      
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      >
-        Add Note
-      </button>
-    </form>
+    </div>
   );
-};
-
-export default SimpleNoteForm;
+}

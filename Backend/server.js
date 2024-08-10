@@ -24,8 +24,8 @@ const pool = mysql.createPool(dbConfig);
 // Promisify for Node.js async/await.
 const promisePool = pool.promise();
 
-app.post("/api/simple-notes", async (req, res) => {
-  const { title, content } = req.body;
+app.post("/api/notes", async (req, res) => {
+  const { title, content, video } = req.body;
   console.log("Received request body:", req.body);
 
   if (!title || !content) {
@@ -33,10 +33,11 @@ app.post("/api/simple-notes", async (req, res) => {
     return res.status(400).json({ error: "Title and content are required" });
   }
 
-  const query = "INSERT INTO Notes (Title, Content) VALUES (?, ?)";
+  const query =
+    "INSERT INTO Notes (Title, Content, VideoLink) VALUES (?, ?, ?)";
 
   try {
-    const [results] = await promisePool.query(query, [title, content]);
+    const [results] = await promisePool.query(query, [title, content, video]);
     console.log("Insertion successful:", results);
     res
       .status(201)
