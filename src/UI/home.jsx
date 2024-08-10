@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HiMenu, HiSearch, HiPlus, HiHome, HiViewGrid, HiUser, HiOutlineChevronRight, HiSun, HiMoon } from 'react-icons/hi';
+import AddBtn from './AddBtn';
 import AddNoteForm from './AddNote';
 
 // Theme toggle component
@@ -49,22 +50,7 @@ const CategoryLink = ({ name }) => (
   </a>
 );
 
-// Navigation Bar Component
-const NavigationBar = () => (
-  <nav className="flex items-center justify-between  md:px-16 px-6 xl:justify-evenly py-3 border-t bg-white dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200 fixed w-full z-[999] bottom-0">
-    {[
-      { name: 'Home', icon: HiHome },
-      { name: 'Search', icon: HiSearch },
-      { name: 'Categories', icon: HiViewGrid },
-      { name: 'Profile', icon: HiUser }
-    ].map(({ name, icon: Icon }) => (
-      <a key={name} href="#" className="flex flex-col items-center gap-1 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-        <Icon className="text-xl" />
-        <span className="text-xs">{name}</span>
-      </a>
-    ))}
-  </nav>
-);
+
 
 // Main App Component
 const NotesApp = () => {
@@ -122,10 +108,10 @@ const NotesApp = () => {
         </section>
 
         <section>
-        
+              <AddBtn/>
         </section>
       </main>
-      <NavigationBar />
+
     </div>
   );
 };
