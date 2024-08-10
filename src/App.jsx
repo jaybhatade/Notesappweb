@@ -6,6 +6,7 @@ import AddNotesPage from "./Pages/AddNotesPage"
 import ProfilePage from "./Pages/ProfilePage"
 import SearchPage from "./Pages/SearchPage"
 import CategoryPage from "./Pages/CategoryPage"
+import DatabaseOverview from './Components/DatabaseOverview';
 
 
 // Define the MainLayout component
@@ -29,7 +30,8 @@ function App() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "add", element: <AddNotesPage /> },
-        { path: "search", element: <SearchPage /> },
+        // { path: "search", element: <SearchPage /> },
+        { path: "search", element: <DatabaseOverview /> },
         { path: "categories", element: <CategoryPage/> },
         { path: "profile", element: <ProfilePage /> },
       ],
