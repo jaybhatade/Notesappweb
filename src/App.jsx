@@ -1,12 +1,12 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import NavigationBar from "./Components/Navbar";
-import NotesApp from "./UI/home";
+import HomePage from "./Pages/HomePage"
 import AddNotesPage from "./Pages/AddNotesPage"
 import ProfilePage from "./Pages/ProfilePage"
 import SearchPage from "./Pages/SearchPage"
 import CategoryPage from "./Pages/CategoryPage"
-import AddBtn from './UI/AddBtn';
+
 
 // Define the MainLayout component
 const MainLayout = () => {
@@ -27,7 +27,7 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
-        { index: true, element: <NotesApp /> },
+        { index: true, element: <HomePage /> },
         { path: "add", element: <AddNotesPage /> },
         { path: "search", element: <SearchPage /> },
         { path: "categories", element: <CategoryPage/> },
@@ -35,6 +35,7 @@ function App() {
       ],
     },
   ]);
+  
 
   return (
     <RouterProvider router={router} />
