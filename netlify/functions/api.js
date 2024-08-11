@@ -42,7 +42,7 @@ const handleErrors = (res, err, errorMessage) => {
 };
 
 // GET endpoints for fetching data
-app.get("/api/topics", async (req, res) => {
+app.get("/topics", async (req, res) => {
   try {
     const topics = await dbQuery("SELECT * FROM Topics");
     res.json(topics);
@@ -51,7 +51,7 @@ app.get("/api/topics", async (req, res) => {
   }
 });
 
-app.get("/api/notes", async (req, res) => {
+app.get("/notes", async (req, res) => {
   try {
     const notes = await dbQuery("SELECT * FROM Notes");
     res.json(notes);
@@ -60,7 +60,7 @@ app.get("/api/notes", async (req, res) => {
   }
 });
 
-app.get("/api/tags", async (req, res) => {
+app.get("/tags", async (req, res) => {
   try {
     const tags = await dbQuery("SELECT * FROM Tags");
     res.json(tags);
@@ -69,7 +69,7 @@ app.get("/api/tags", async (req, res) => {
   }
 });
 
-app.get("/api/note-tags", async (req, res) => {
+app.get("/note-tags", async (req, res) => {
   try {
     const noteTags = await dbQuery("SELECT * FROM NoteTags");
     res.json(noteTags);
@@ -78,73 +78,8 @@ app.get("/api/note-tags", async (req, res) => {
   }
 });
 
-// POST endpoints for creating new entries
-app.post("/api/topics", async (req, res) => {
-  const { topicName, description } = req.body;
-  if (!topicName) {
-    return res.status(400).json({ error: "Topic name is required" });
-  }
-  try {
-    const result = await dbQuery(
-      "INSERT INTO Topics (TopicName, Description) VALUES (?, ?)",
-      [topicName, description]
-    );
-    res.status(201).json({ message: "Topic added successfully", id: result.insertId });
-  } catch (err) {
-    handleErrors(res, err, "Error creating topic");
-  }
-});
-
-app.post("/api/notes", async (req, res) => {
-  const { topicId, title, content, videoLink } = req.body;
-  if (!title || !content) {
-    return res.status(400).json({ error: "Title and content are required" });
-  }
-  try {
-    const result = await dbQuery(
-      "INSERT INTO Notes (TopicID, Title, Content, VideoLink) VALUES (?, ?, ?, ?)",
-      [topicId, title, content, videoLink]
-    );
-    res.status(201).json({ message: "Note added successfully", id: result.insertId });
-  } catch (err) {
-    handleErrors(res, err, "Error creating note");
-  }
-});
-
-app.post("/api/tags", async (req, res) => {
-  const { tagName } = req.body;
-  if (!tagName) {
-    return res.status(400).json({ error: "Tag name is required" });
-  }
-  try {
-    const result = await dbQuery(
-      "INSERT INTO Tags (TagName) VALUES (?)",
-      [tagName]
-    );
-    res.status(201).json({ message: "Tag added successfully", id: result.insertId });
-  } catch (err) {
-    handleErrors(res, err, "Error creating tag");
-  }
-});
-
-app.post("/api/note-tags", async (req, res) => {
-  const { noteId, tagId } = req.body;
-  if (!noteId || !tagId) {
-    return res.status(400).json({ error: "Note ID and Tag ID are required" });
-  }
-  try {
-    await dbQuery(
-      "INSERT INTO NoteTags (NoteID, TagID) VALUES (?, ?)",
-      [noteId, tagId]
-    );
-    res.status(201).json({ message: "Note-Tag relation added successfully" });
-  } catch (err) {
-    handleErrors(res, err, "Error creating note-tag relation");
-  }
-});
-
 // DELETE endpoint for notes
-app.delete("/api/notes/:id", async (req, res) => {
+app.delete("/notes/:id", async (req, res) => {
   const noteId = req.params.id;
   try {
     // First, delete related entries in NoteTags
@@ -170,4 +105,4 @@ app.use((err, req, res, next) => {
 });
 
 // Export the serverless function
-exports.handler = serverless(app);
+module.exports.handler = serverless(app);

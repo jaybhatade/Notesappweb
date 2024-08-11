@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = '/.netlify/functions/api';
+const API_BASE_URL = '/api'; // Updated to match the redirect rule
 
 const useApi = (endpoint) => {
   const [data, setData] = useState([]);
@@ -16,6 +16,7 @@ const useApi = (endpoint) => {
         setData(response.data);
         setLoading(false);
       } catch (err) {
+        console.error(`Error fetching ${endpoint}:`, err);
         setError(`Error fetching ${endpoint.slice(1)}. Please try again later.`);
         setLoading(false);
       }
@@ -106,16 +107,16 @@ const DatabaseOverview = () => {
   const { data: tags, loading: tagsLoading, error: tagsError } = useApi('/tags');
   const { data: noteTags, loading: noteTagsLoading, error: noteTagsError } = useApi('/note-tags');
 
+
   const [error, setError] = useState(null);
 
   const deleteNote = async (noteId) => {
     try {
       await axios.delete(`${API_BASE_URL}/notes/${noteId}`);
       // Update the notes state after successful deletion
-      const updatedNotes = notes.filter(note => note.NoteID !== noteId);
-      // We need to update the notes state here, which might require lifting the state up
-      // or using a state management solution like Redux or React Query
+      // You might want to implement a state management solution or use React Query for this
     } catch (err) {
+      console.error('Error deleting note:', err);
       setError('Error deleting note. Please try again later.');
     }
   };
